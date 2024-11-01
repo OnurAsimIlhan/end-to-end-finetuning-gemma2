@@ -16,7 +16,7 @@ uploaded=False
 # Initialize environment variable
 if uploaded_file is not None:
     # Set the environment variable to the path of the saved file
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = uploaded_file.name
+    api_key = uploaded_file.name
     st.sidebar.success("API Key uploaded successfully.")
     uploaded = True
 else:
@@ -24,7 +24,7 @@ else:
 
 # Initialize the AI Platform with the project and location
 if uploaded:
-    aiplatform.init(project=project, location=location)
+    aiplatform.init(project=project, location=location, api_key=api_key)
     endpoint = aiplatform.Endpoint("projects/" + project + "/locations/" + location + "/endpoints/" + endpoint_id)
 
     instruction = st.text_input("Instruction", "Match the potential use case with the corresponding activity and emission values based on the provided context.")
