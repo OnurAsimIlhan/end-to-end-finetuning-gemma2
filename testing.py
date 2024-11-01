@@ -13,6 +13,7 @@ st.sidebar.title("Settings")
 # Sidebar file uploader for JSON file
 uploaded_file = st.sidebar.file_uploader("Upload your Google Cloud API Key JSON file:", type="json")
 uploaded=False
+api_key = None
 # Initialize environment variable
 if uploaded_file is not None:
     # Set the environment variable to the path of the saved file
@@ -23,7 +24,7 @@ else:
     st.sidebar.info("Please upload a JSON file with your Google Cloud credentials.")
 
 # Initialize the AI Platform with the project and location
-if uploaded:
+if api_key:
     aiplatform.init(project=project, location=location, api_key=api_key)
     endpoint = aiplatform.Endpoint("projects/" + project + "/locations/" + location + "/endpoints/" + endpoint_id)
 
