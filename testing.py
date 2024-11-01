@@ -1,5 +1,4 @@
 from google.cloud import aiplatform
-import json
 import streamlit as st
 import os
 
@@ -12,22 +11,27 @@ location = "us-central1"
 st.sidebar.title("Settings")
 # Sidebar file uploader for JSON file
 uploaded_file = st.sidebar.file_uploader("Upload your Google Cloud API Key JSON file:", type="json")
-uploaded=False
-api_key = None
+uploaded = False
+
 # Initialize environment variable
 if uploaded_file is not None:
+    # Save the uploaded file to a temporary location
+    with open("google_credentials.json", "wb") as f:
+        f.write(uploaded_file.getbuffer())
+    
     # Set the environment variable to the path of the saved file
-    api_key = uploaded_file.name
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
     st.sidebar.success("API Key uploaded successfully.")
     uploaded = True
 else:
     st.sidebar.info("Please upload a JSON file with your Google Cloud credentials.")
 
 # Initialize the AI Platform with the project and location
-if api_key:
-    aiplatform.init(project=project, location=location, api_key=api_key)
+if uploaded:
+    aiplatform.init(project=project, location=location)
     endpoint = aiplatform.Endpoint("projects/" + project + "/locations/" + location + "/endpoints/" + endpoint_id)
 
+    # Text inputs for instruction and input data
     instruction = st.text_input("Instruction", "Match the potential use case with the corresponding activity and emission values based on the provided context.")
     input_text = st.text_area("Input", "Doğal Gaz Kullanımı, Gaz Faturası Yönetimi, Isınma Maliyetleri, Enerji Tasarrufu, Gaz Dağıtımı")
 
@@ -45,4 +49,3 @@ if api_key:
             st.write("Predictions:")
             for p in completions.predictions:
                 st.write(p)
-    
