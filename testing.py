@@ -29,7 +29,7 @@ else:
     st.sidebar.info("Please upload a JSON file with your Google Cloud credentials.")
 
 # Main page layout
-st.title("Activity and Emission Rates Predictor")
+st.title("Activity and Emmision Rates Predictor")
 st.markdown("""
     This app helps you generate responses for potential use cases by matching them to relevant activities and emission values.
     Fill in the inputs below and click on **Generate Response**.
