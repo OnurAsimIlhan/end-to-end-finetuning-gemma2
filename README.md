@@ -4,7 +4,7 @@ This project demonstrates a complete, automated, and modular pipeline for fine-t
 
 This project is designed in a way that it can be **scaled up or down**, can use **different LLM models**, based on custom input **choose models by accuracy and cost**. **Custom logs** helps to identify any problem occured during pipeline. This project can be improved by adding technologies such as **GKE**, **Grafana**.
 
-[Access the Deployed Endpoint for Testing](https://end-to-end-finetuning-gemma2-4kklzfzqtdpjuw2gmtcjapp.streamlit.app/)
+[Access the Deployed Endpoint for Testing](https://end-to-end-finetuning-gemma2-4kklzfzqtdpjuw2gmtcjapp.streamlit.app/)  (Note: You will be needing Cloud API Key in JSON form)
 
 ## Pipeline Diagram
 ![alt text](https://github.com/OnurAsimIlhan/end-to-end-finetuning-gemma2/blob/main/diagram.png)
